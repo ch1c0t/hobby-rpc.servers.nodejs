@@ -1,0 +1,26 @@
+{
+  "name": "hobby-rpc.server",
+  "main": "./lib/main.js",
+  "exports": {
+    "require": "./lib/main.js",
+    "import": "./lib/esm.mjs"
+  },
+  "version": "0.0.0",
+  "author": "Anatoly Chernov <chertoly@gmail.com>",
+  "description": "left as an exercise to the reader",
+  "license": "0BSD",
+  "keywords": [
+    "coffeescript"
+  ],
+  "scripts": {
+    "build": "coffeelib build",
+    "start": "coffeelib watch",
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "coffeelib": "^0.0.6",
+    "hobby-rpc": "^0.0.1",
+    "isomorphic-fetch": "^3.0.0",
+    "jasmine": "^3.10.0"
+  }
+}
