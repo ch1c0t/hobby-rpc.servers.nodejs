@@ -15,6 +15,11 @@ describe 'Server', ->
           Hello: (name) ->
             "Hello, #{name}."
 
-    it 'works', ->
+    it 'responds to Hello', ->
       output = await rpc 'Hello', 'World'
       expect(output).toBe 'Hello, World.'
+
+    it 'fails for functions that do not exist', ->
+      promise = rpc 'SomeName', 'World'
+      promise.catch (error) ->
+        expect(error).toBe ''
