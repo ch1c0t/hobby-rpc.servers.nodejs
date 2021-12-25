@@ -1,6 +1,6 @@
 { BadRequest } = require './BadRequest'
 
-exports.RespondToPOST = ({ response, request, functions }) ->
+exports.RespondToPOST = ({ response, request, functions, user }) ->
   ContentType = request.headers['content-type'] ? 'missing'
   unless ContentType.startsWith? 'application/json'
     error = "The content type is #{ContentType}, but application/json was expected."
@@ -14,11 +14,7 @@ exports.RespondToPOST = ({ response, request, functions }) ->
       message = JSON.parse data
 
       if fn = functions[message.fn]
-        output = if message.in?
-          fn message.in
-        else
-          fn()
-
+        output = fn.call { user }, message.in
         response.setHeader 'Content-Type', 'application/json'
         response.statusCode = 200
         response.end JSON.stringify output

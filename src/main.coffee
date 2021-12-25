@@ -23,7 +23,7 @@ exports.Server = ({ functions, FindUser }) ->
         when 'OPTIONS'
           RespondToOPTIONS { response }
         when 'POST'
-          RespondToPOST { response, request, functions }
+          RespondToPOST { response, request, functions, user }
 
     catch error
       BadRequest { response, error }

@@ -28,8 +28,11 @@ describe 'Server', ->
       @server = await StartServer
         functions:
           SomeFunction: -> 'output'
+          HelloName: ->
+            "Hello, #{@user.name}."
         FindUser: (token) ->
-          token is 'ValidToken'
+          if token is 'ValidToken'
+            name: 'ValidUser'
 
     it 'returns the output when a valid token was passed', ->
       rpc = RPC
@@ -48,3 +51,11 @@ describe 'Server', ->
         token: 'InvalidToken'
 
       await expectAsync(rpc 'SomeFunction').toBeRejectedWith 403
+
+    it 'provides access to a user', ->
+      rpc = RPC
+        url: 'http://localhost:8090'
+        token: 'ValidToken'
+
+      output = await rpc 'HelloName'
+      expect(output).toBe "Hello, ValidUser."
