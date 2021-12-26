@@ -23,6 +23,31 @@ describe 'Server', ->
     it 'fails for functions that do not exist', ->
       await expectAsync(rpc 'SomeName', 'World').toBeRejectedWith 400
 
+
+  describe 'CORS', ->
+    it 'sets default CORS headers', ->
+      @server = await StartServer
+        functions:
+          Hello: (name) ->
+            "Hello, #{name}."
+
+      response = await fetch 'http://localhost:8090', method: 'OPTIONS'
+      expect(response.status).toBe 200
+      expect(response.headers.get 'Access-Control-Allow-Methods').toBe 'POST, OPTIONS'
+      expect(response.headers.get 'Access-Control-Allow-Headers').toBe 'Authorization, Content-Type'
+      expect(response.headers.get 'Access-Control-Max-Age').toBe '86400'
+
+      response = await fetch 'http://localhost:8090',
+        method: 'POST'
+        headers:
+          'Content-Type': 'application/json'
+        body: JSON.stringify
+          fn: 'Hello'
+          in: 'A'
+
+      expect(response.status).toBe 200
+      expect(response.headers.get 'Access-Control-Allow-Origin').toBe '*'
+
   describe 'FindUser', ->
     beforeEach ->
       @server = await StartServer
