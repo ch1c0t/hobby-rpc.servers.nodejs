@@ -21,7 +21,7 @@ describe 'Server', ->
       expect(output).toBe 'Hello, World.'
 
     it 'fails for functions that do not exist', ->
-      await expectAsync(rpc 'SomeName', 'World').toBeRejectedWith 400
+      await expectAsync(rpc 'BadName', 'World').toBeRejectedWith 400
 
 
   describe 'CORS', ->
