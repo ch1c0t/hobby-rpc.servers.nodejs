@@ -64,6 +64,36 @@ describe 'Server', ->
       expect(response.headers.get 'Access-Control-Allow-Headers').toBe 'Authorization, Content-Type, Content-Length'
       expect(response.headers.get 'Access-Control-Max-Age').toBe '80000'
 
+    it 'allows to restrict the origin', ->
+      @server = await StartServer
+        CORS:
+          Origins: [
+            'https://allowed.origin'
+          ]
+        functions:
+          Hello: (name) ->
+            "Hello, #{name}."
+
+      response = await fetch 'http://localhost:8090',
+        method: 'POST'
+        headers:
+          'Content-Type': 'application/json'
+          'Origin': 'https://not.allowed'
+        body: JSON.stringify
+          fn: 'Hello'
+          in: 'A'
+      expect(response.status).toBe 400
+
+      response = await fetch 'http://localhost:8090',
+        method: 'POST'
+        headers:
+          'Content-Type': 'application/json'
+          'Origin': 'https://allowed.origin'
+        body: JSON.stringify
+          fn: 'Hello'
+          in: 'A'
+      expect(response.status).toBe 200
+
   describe 'FindUser', ->
     beforeEach ->
       @server = await StartServer

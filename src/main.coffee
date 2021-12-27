@@ -4,6 +4,7 @@ http = require 'http'
 { RespondToOPTIONS } = require './RespondToOPTIONS'
 { RespondToPOST } = require './RespondToPOST'
 { VerifyToken } = require './VerifyToken'
+{ VerifyOrigin } = require './VerifyOrigin'
 
 exports.Server = ({ functions, FindUser, CORS }) ->
   http.createServer (request, response) ->
@@ -17,7 +18,7 @@ exports.Server = ({ functions, FindUser, CORS }) ->
         user = VerifyToken { response, request, FindUser }
         return unless user
 
-      response.setHeader 'Access-Control-Allow-Origin', '*'
+      return unless VerifyOrigin { response, request, CORS }
 
       switch method
         when 'OPTIONS'
