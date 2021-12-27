@@ -5,7 +5,7 @@ http = require 'http'
 { RespondToPOST } = require './RespondToPOST'
 { VerifyToken } = require './VerifyToken'
 
-exports.Server = ({ functions, FindUser }) ->
+exports.Server = ({ functions, FindUser, CORS }) ->
   http.createServer (request, response) ->
     try
       { method } = request
@@ -21,7 +21,7 @@ exports.Server = ({ functions, FindUser }) ->
 
       switch method
         when 'OPTIONS'
-          RespondToOPTIONS { response }
+          RespondToOPTIONS { response, CORS }
         when 'POST'
           RespondToPOST { response, request, functions, user }
 

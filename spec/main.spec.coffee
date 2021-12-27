@@ -48,6 +48,22 @@ describe 'Server', ->
       expect(response.status).toBe 200
       expect(response.headers.get 'Access-Control-Allow-Origin').toBe '*'
 
+    it 'allows to pass custom CORS headers', ->
+      @server = await StartServer
+        CORS:
+          Methods: 'GET, POST, OPTIONS'
+          Headers: 'Authorization, Content-Type, Content-Length'
+          MaxAge: '80000'
+        functions:
+          Hello: (name) ->
+            "Hello, #{name}."
+
+      response = await fetch 'http://localhost:8090', method: 'OPTIONS'
+      expect(response.status).toBe 200
+      expect(response.headers.get 'Access-Control-Allow-Methods').toBe 'GET, POST, OPTIONS'
+      expect(response.headers.get 'Access-Control-Allow-Headers').toBe 'Authorization, Content-Type, Content-Length'
+      expect(response.headers.get 'Access-Control-Max-Age').toBe '80000'
+
   describe 'FindUser', ->
     beforeEach ->
       @server = await StartServer
