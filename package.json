@@ -7,7 +7,7 @@
   },
   "version": "0.0.0",
   "author": "Anatoly Chernov <chertoly@gmail.com>",
-  "description": "left as an exercise to the reader",
+  "description": "To create Hobby-RPC servers with Node.js",
   "license": "0BSD",
   "keywords": [
     "coffeescript"
