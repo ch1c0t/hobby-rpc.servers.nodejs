@@ -5,13 +5,18 @@
     "require": "./lib/main.js",
     "import": "./lib/esm.mjs"
   },
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": "Anatoly Chernov <chertoly@gmail.com>",
   "description": "To create Hobby-RPC servers with Node.js",
   "license": "0BSD",
   "keywords": [
-    "coffeescript"
+    "coffeescript",
+    "rpc"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ch1c0t/hobby-rpc.servers.nodejs"
+  },
   "scripts": {
     "build": "coffeelib build",
     "start": "coffeelib watch",
