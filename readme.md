@@ -18,7 +18,6 @@ import { Server } from 'hobby-rpc.server'
 
 `Server` is a function which returns [an `http.Server`][http.Server].
 It takes an object which must have the `functions` property.
-Functions can return any object serializable with [`JSON.stringify`][JSON.stringify].
 
 Here is a simple server providing `SomeNullaryFunction` and `SomeUnaryFunction`:
 
@@ -37,9 +36,17 @@ To start a server, you can use [`server.listen()`][server.listen]:
 server.listen 8080
 ```
 
-[JSON.stringify]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
 [http.Server]: https://nodejs.org/api/http.html#class-httpserver
 [server.listen]: https://nodejs.org/api/http.html#serverlisten
+
+## Functions
+
+`functions` can return any objects serializable with [`JSON.stringify`][JSON.stringify].
+If a function returns a rejected Promise or throws an error,
+the server responds with [400 Bad Request][BadRequest].
+
+[JSON.stringify]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
+[BadRequest]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
 
 ## CORS headers
 

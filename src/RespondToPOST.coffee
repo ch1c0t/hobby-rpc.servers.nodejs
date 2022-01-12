@@ -14,7 +14,9 @@ exports.RespondToPOST = ({ response, request, functions, user }) ->
       message = JSON.parse data
 
       if fn = functions[message.fn]
-        output = fn.call { user }, message.in
+        value = fn.call { user }, message.in
+        output = if typeof value.then is 'function' then await value else value
+
         response.setHeader 'Content-Type', 'application/json'
         response.statusCode = 200
         response.end JSON.stringify output
