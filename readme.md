@@ -91,9 +91,15 @@ server = Server
 `FindUser` should be a function that takes one argument, a String `token`.
 `token` is what clients are supposed to pass in [the Authorization header][Authorization].
 
-If `FindUser` returns a falsy value, the server responds with [403 Forbidden][Forbidden].
+If `FindUser` returns one of these:
 
-If `FindUser` returns a non-falsy value, the server will assume it is something that represents the current user. It will be available inside of the function as `@user`.
+- a falsy value;
+- a rejected Promise;
+- a Promise resolved to a falsy value;
+
+or throws an error, the server responds with [403 Forbidden][Forbidden].
+
+If `FindUser` returns something else, the server will assume it is something that represents the current user. It will be available inside of the function as `@user`. Or, if it is a Promise, `@user` is the value resolved from this Promise.
 
 [Authorization]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
 [Forbidden]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403

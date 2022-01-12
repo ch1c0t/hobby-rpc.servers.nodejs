@@ -1,10 +1,13 @@
 { Server } = require 'hobby-rpc.server'
 
 StartServer = (params) ->
+  port = params.port ? 8090
+  delete params.port
+
   server = Server params
 
   new Promise (resolve) ->
-    server.listen 8090, ->
+    server.listen port, ->
       resolve server
 
 StopServer = (server) ->

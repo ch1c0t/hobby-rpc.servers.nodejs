@@ -4,7 +4,13 @@ exports.VerifyToken = ({ response, request, FindUser }) ->
   try
     user = FindUser token
     throw "no user for token #{token}" unless user
-    user
+
+    if typeof user.then is 'function'
+      user = await user
+      throw "no user in Promise for token #{token}" unless user
+      user
+    else
+      Promise.resolve user
   catch error
     console.error error
     response.statusCode = 403

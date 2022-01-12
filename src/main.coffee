@@ -15,7 +15,7 @@ exports.Server = ({ functions, FindUser, CORS }) ->
         BadRequest { response, error }
 
       if typeof FindUser is 'function'
-        user = VerifyToken { response, request, FindUser }
+        user = await VerifyToken { response, request, FindUser }
         return unless user
 
       return unless VerifyOrigin { response, request, CORS }
