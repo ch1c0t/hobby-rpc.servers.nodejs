@@ -1,6 +1,6 @@
 { BadRequest } = require './BadRequest'
 
-exports.VerifyOrigin = ({ response, request, CORS }) ->
+exports.OriginIsValid = ({ response, request, CORS }) ->
   if origins = CORS?.Origins 
     origin = request.headers['origin']
 

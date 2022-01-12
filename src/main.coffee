@@ -4,7 +4,7 @@ http = require 'http'
 { RespondToOPTIONS } = require './RespondToOPTIONS'
 { RespondToPOST } = require './RespondToPOST'
 { VerifyToken } = require './VerifyToken'
-{ VerifyOrigin } = require './VerifyOrigin'
+{ OriginIsValid } = require './OriginIsValid'
 
 exports.Server = ({ functions, FindUser, CORS }) ->
   http.createServer (request, response) ->
@@ -18,7 +18,7 @@ exports.Server = ({ functions, FindUser, CORS }) ->
         user = await VerifyToken { response, request, FindUser }
         return unless user
 
-      return unless VerifyOrigin { response, request, CORS }
+      return unless OriginIsValid { response, request, CORS }
 
       switch method
         when 'OPTIONS'
