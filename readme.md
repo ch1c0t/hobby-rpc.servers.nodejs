@@ -106,7 +106,9 @@ If `FindUser` returns one of these:
 
 or throws an error, the server responds with [403 Forbidden][Forbidden].
 
-If `FindUser` returns something else, the server will assume it is something that represents the current user. It will be available inside of the function as `@user`. Or, if it is a Promise, `@user` is the value resolved from this Promise.
+If `FindUser` returns something else, the server will assume it is something that represents the current user.
+If it is a Promise, the value resolved from this Promise will be available inside of [the functions](#functions) as `@user`.
+If it is not a Promise, it will be available as `@user`.
 
 [Authorization]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
 [Forbidden]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
