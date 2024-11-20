@@ -34,6 +34,8 @@ To start a server, you can use [`server.listen()`][server.listen]:
 
 ```coffee
 server.listen 8080
+# or
+server.listen '/path/to/unix.socket'
 ```
 
 [http.Server]: https://nodejs.org/api/http.html#class-httpserver
@@ -108,7 +110,7 @@ or throws an error, the server responds with [403 Forbidden][Forbidden].
 
 If `FindUser` returns something else, the server will assume it is something that represents the current user.
 If it is a Promise, the value resolved from this Promise will be available inside of [the functions](#functions) as `@user`.
-If it is not a Promise, it will be available as `@user`.
+If it is not a Promise, it itself will be available as `@user`.
 
 [Authorization]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
 [Forbidden]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
