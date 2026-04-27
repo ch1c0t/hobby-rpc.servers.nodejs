@@ -18,8 +18,8 @@ describe 'Server', ->
 
   it 'responds to Hello', ->
     rpc = RPC url: @url
-    output = await rpc 'Hello', 'World'
-    expect(output).toBe 'Hello, World.'
+    await expectAsync rpc 'Hello', 'World'
+      .toBeResolvedTo 'Hello, World.'
 
   it 'fails for functions that do not exist', ->
     rpc = RPC url: @url
@@ -27,8 +27,8 @@ describe 'Server', ->
 
   it 'responds to AsyncFunction', ->
     rpc = RPC url: @url
-    output = await rpc 'AsyncFunction'
-    expect(output).toBe 'from AsyncFunction'
+    await expectAsync rpc 'AsyncFunction'
+      .toBeResolvedTo 'from AsyncFunction'
 
   it 'fails for functions returning rejected Promises', ->
     rpc = RPC url: @url
@@ -36,5 +36,5 @@ describe 'Server', ->
 
   it 'responds to AsyncFunctionResolvingToFalse', ->
     rpc = RPC url: @url
-    output = await rpc 'AsyncFunctionResolvingToFalse'
-    expect(output).toBe false
+    await expectAsync rpc 'AsyncFunctionResolvingToFalse'
+      .toBeResolvedTo false
