@@ -26,6 +26,7 @@
     "@ch1c0t/ext": "^0.3.2",
     "coffeelib": "^0.6.0",
     "hobby-rpc": "^0.2.0",
+    "hobby-rpc.client": "^0.0.2",
     "jasmine": "^6.2.0"
   }
 }

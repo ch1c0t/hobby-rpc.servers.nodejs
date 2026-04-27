@@ -24,6 +24,10 @@ describe 'FindUser normally', ->
     rpc = RPC url: @url
     await expectAsync(rpc 'SomeFunction').toBeRejectedWith 403
 
+    Client = require('hobby-rpc.client').RPC
+    rpc = Client url: @url
+    await expectAsync(rpc 'SomeFunction').toBeRejectedWith 403
+
   it 'fails when an invalid token was passed', ->
     rpc = RPC
       url: @url

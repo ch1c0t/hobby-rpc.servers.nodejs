@@ -114,3 +114,9 @@ If it is not a Promise, it itself will be available as `@user`.
 
 [Authorization]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization
 [Forbidden]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403
+
+## Development
+
+`npm start` to start a development session.
+
+`npm test` to run the specs.
