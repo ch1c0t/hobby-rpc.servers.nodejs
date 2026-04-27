@@ -1,13 +1,3 @@
-String::lines = ->
-  @split "\n"
-
-String::indent = (n = 2) ->
-  lines =
-    for line in @lines()
-      space = ' '.repeat n
-      space + line
-  lines.join "\n"
-
 { mkdir, write } = IO.sync
 { compile } = require 'coffeescript'
 CreateServerFile = ({ path, code }) ->

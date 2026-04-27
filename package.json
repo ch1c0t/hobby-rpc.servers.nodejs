@@ -23,7 +23,7 @@
     "test": "coffee scripts/run_specs.coffee"
   },
   "devDependencies": {
-    "@ch1c0t/ext": "^0.3.1",
+    "@ch1c0t/ext": "^0.3.2",
     "coffeelib": "^0.6.0",
     "hobby-rpc": "^0.2.0",
     "jasmine": "^6.2.0"
