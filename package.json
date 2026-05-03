@@ -20,13 +20,11 @@
   "scripts": {
     "build": "coffeelib build",
     "start": "coffeelib watch",
-    "test": "coffee scripts/run_specs.coffee"
+    "test": "coffeelib test"
   },
   "devDependencies": {
-    "@ch1c0t/ext": "^0.3.2",
-    "coffeelib": "^0.6.0",
+    "coffeelib": "^0.6.3",
     "hobby-rpc": "^0.2.1",
-    "hobby-rpc.client": "^0.0.2",
-    "jasmine": "^6.2.0"
+    "hobby-rpc.client": "^0.0.2"
   }
 }
